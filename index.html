@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>QuantumKonnect</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#050814;
+color:white;
+margin:0;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+padding:20px;
+background:#02040a;
+}
+
+.logo{
+color:#00f2ff;
+font-size:26px;
+}
+
+.search{
+padding:10px;
+width:40%;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:40px;
+}
+
+.product{
+background:#0c1326;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.product img{
+width:100%;
+border-radius:8px;
+}
+
+.price{
+font-size:18px;
+margin-top:10px;
+}
+
+.sale{
+color:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">⚡ QuantumKonnect</div>
+
+<input class="search" id="search" placeholder="Search electronics..." onkeyup="searchProducts()">
+
+<a href="admin.html">Admin</a>
+
+</header>
+
+
+<div class="products" id="products"></div>
+
+
+<script>
+
+let products = JSON.parse(localStorage.getItem("products")) || []
+
+function showProducts(){
+
+let container = document.getElementById("products")
+
+container.innerHTML=""
+
+products.forEach(p=>{
+
+container.innerHTML +=
+
+`<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>${p.description}</p>
+
+<div class="price">
+
+${p.discount ? `<span class="sale">SALE</span> Rs ${p.price - (p.price*p.discount/100)} <s>Rs ${p.price}</s>` : `Rs ${p.price}`}
+
+</div>
+
+</div>`
+
+})
+
+}
+
+function searchProducts(){
+
+let text = document.getElementById("search").value.toLowerCase()
+
+let container = document.getElementById("products")
+
+container.innerHTML=""
+
+products.filter(p=>p.name.toLowerCase().includes(text)).forEach(p=>{
+
+container.innerHTML +=
+
+`<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>${p.description}</p>
+
+<div class="price">Rs ${p.price}</div>
+
+</div>`
+
+})
+
+}
+
+showProducts()
+
+</script>
+
+</body>
+
+</html>
