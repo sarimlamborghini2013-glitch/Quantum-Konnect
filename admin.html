@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>QuantumKonnect Admin</title>
+
+<style>
+
+body{
+background:#050814;
+font-family:Arial;
+color:white;
+padding:40px;
+}
+
+.card{
+background:#0c1326;
+padding:20px;
+border-radius:10px;
+margin-bottom:30px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+padding:10px;
+background:#00f2ff;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>⚡ QuantumKonnect Admin</h1>
+
+
+<div class="card">
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product name">
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<input id="price" placeholder="Price PKR">
+
+<input id="discount" placeholder="Discount %">
+
+<input id="image" placeholder="Image URL">
+
+<button onclick="saveProduct()">Save Product</button>
+
+</div>
+
+
+<script>
+
+function saveProduct(){
+
+let products = JSON.parse(localStorage.getItem("products")) || []
+
+let product = {
+
+name:document.getElementById("name").value,
+description:document.getElementById("description").value,
+price:Number(document.getElementById("price").value),
+discount:Number(document.getElementById("discount").value),
+image:document.getElementById("image").value
+
+}
+
+products.push(product)
+
+localStorage.setItem("products",JSON.stringify(products))
+
+alert("Product saved")
+
+}
+
+</script>
+
+</body>
+
+</html>
